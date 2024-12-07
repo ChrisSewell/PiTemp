@@ -1,0 +1,2 @@
+asciichartpy==1.5.23
+psutil==5.9.8
