@@ -45,6 +45,19 @@ def log_temperature(temp):
         with open(LOG_FILE, "a") as log_file:
             log_file.write(f"{time.strftime('%Y-%m-%d %H:%M:%S')} - {temp} °C\n")
 
+# Function to display summary on exit
+def display_summary():
+    if temps:
+        max_temp = max(temps)
+        min_temp = min(temps)
+        avg_temp = statistics.mean(temps)
+        print("\n--- Temperature Summary ---")
+        print(f"Highest Temp: {max_temp:.1f} °C")
+        print(f"Lowest Temp:  {min_temp:.1f} °C")
+        print(f"Average Temp: {avg_temp:.1f} °C")
+    else:
+        print("\nNo temperature data collected.")
+
 # Function to draw the graph using asciichartpy
 def draw_graph(stdscr, temps, cpu_load, paused):
     stdscr.clear()
@@ -151,5 +164,6 @@ def main(stdscr):
 try:
     curses.wrapper(main)
 finally:
+    display_summary()
     print("\nMonitoring stopped.")
 
